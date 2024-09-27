@@ -182,8 +182,6 @@ class FrameImageApp:
                 messagebox.showerror("Error", "Please select File 2.")
                 return
             state = "Submission Successful"
-            parameters.change_variable('Input_ImgTWO1', fileTWO1)
-            parameters.change_variable('Input_ImgTWO2', fileTWO2)
             messagebox.showinfo(state)
 
         elif selection == "DBL":
@@ -199,12 +197,9 @@ class FrameImageApp:
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nInteger: {int_value}")
 
-        self.root.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
     parameters = data_file()
-    parameters.read_pandas()
     app = FrameImageApp(root, parameters)
     root.mainloop()
-    parameters.write_file()

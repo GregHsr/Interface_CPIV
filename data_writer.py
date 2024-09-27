@@ -17,7 +17,6 @@ class data_file:
     # Read the data from the txt  file with pandas
     def read_pandas(self):
         self.data = pd.read_csv(os.path.join(self.path, self.namefile))
-        print(self.data)
 
     def change_variable(self, var, value):
         self.data.loc[self.data['Variable'] == var, 'Value'] = value
