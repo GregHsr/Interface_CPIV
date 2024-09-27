@@ -70,7 +70,7 @@ class FrameImageApp:
                                             command=self.browse_file_IMGdbl)
         self.file_IMGdbl_button.grid(row=2, column=2, padx=10, pady=10)
 
-        # Integer input
+        # SEQ selector 
         self.int_label = tk.Label(self.root, text="Enter an Integer:")
         self.int_entry = tk.Entry(self.root,
                                   textvariable=self.integer_value,
@@ -191,6 +191,7 @@ class FrameImageApp:
             if not file_IMGdbl:
                 messagebox.showerror("Error", "Please select File 2.")
                 return
+            parameters.change_variable('Input_Imgdouble', file_IMGdbl)
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nFile 2: {file_IMGdbl}")
 
