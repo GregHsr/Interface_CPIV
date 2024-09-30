@@ -39,7 +39,7 @@ class FrameImageApp:
 
         # TWO selector
         # First file selector
-        self.fileTWO1_label = tk.Label(self.root, text="File 1:")
+        self.fileTWO1_label = tk.Label(self.root, text="Image 1:")
         self.fileTWO1_label.grid(row=1, column=0, padx=10, pady=10)
         self.fileTWO1_entry = tk.Entry(self.root,
                                        textvariable=self.fileTWO1_path,
@@ -51,7 +51,7 @@ class FrameImageApp:
         self.fileTWO1_button.grid(row=1, column=2, padx=10, pady=10)
 
         # Second file selector
-        self.fileTWO2_label = tk.Label(self.root, text="File 2:")
+        self.fileTWO2_label = tk.Label(self.root, text="Image 2:")
         self.fileTWO2_label.grid(row=2, column=0, padx=10, pady=10)
         self.fileTWO2_entry = tk.Entry(self.root,
                                        textvariable=self.fileTWO2_path,
@@ -63,7 +63,7 @@ class FrameImageApp:
         self.fileTWO2_button.grid(row=2, column=2, padx=10, pady=10)
 
         # DBL selector
-        self.file_IMGdbl_label = tk.Label(self.root, text="File 2:")
+        self.file_IMGdbl_label = tk.Label(self.root, text="Image double:")
         self.file_IMGdbl_label.grid(row=2, column=0, padx=10, pady=10)
         self.file_IMGdbl_entry = tk.Entry(self.root,
                                           textvariable=self.file_IMGdbl_path,
@@ -88,7 +88,7 @@ class FrameImageApp:
 
         # SEQ selector
         # Integer_debut input
-        self.int_debut_label = tk.Label(self.root, text="Enter an Integer:")
+        self.int_debut_label = tk.Label(self.root, text="Input_SEQdebut:")
         self.int_debut_entry = tk.Entry(self.root,
                                         textvariable=self.int_deb_value,
                                         width=10)
@@ -96,7 +96,7 @@ class FrameImageApp:
         self.int_debut_entry.grid(row=1, column=1, padx=10, pady=10)
 
         # Integer_inter input
-        self.int_inter_label = tk.Label(self.root, text="Enter an Integer:")
+        self.int_inter_label = tk.Label(self.root, text="Input_SEQinterImg:")
         self.int_inter_entry = tk.Entry(self.root,
                                         textvariable=self.int_inter_value,
                                         width=10)
@@ -104,7 +104,7 @@ class FrameImageApp:
         self.int_inter_entry.grid(row=2, column=1, padx=10, pady=10)
 
         # Integer_fin input
-        self.int_fin_label = tk.Label(self.root, text="Enter an Integer:")
+        self.int_fin_label = tk.Label(self.root, text="Input_SEQPaire:")
         self.int_fin_entry = tk.Entry(self.root,
                                       textvariable=self.int_fin_value,
                                       width=10)
