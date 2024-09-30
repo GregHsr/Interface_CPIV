@@ -13,7 +13,10 @@ class FrameImageApp:
         self.fileTWO2_path = tk.StringVar()
         self.file_IMGdbl_path = tk.StringVar()
         self.seqdbl_dir_path = tk.StringVar()
-        self.integer_value = tk.IntVar(value=0)
+        self.int_deb_value = tk.IntVar(value=0)
+        self.int_inter_value = tk.IntVar(value=0)
+        self.int_fin_value = tk.IntVar(value=0)
+        self.seq_dir_path = tk.StringVar()
 
         self.options_typedata = ["TWO", "DBL", "SEQDBL", "SEQ"]
 
@@ -71,11 +74,6 @@ class FrameImageApp:
                                             command=self.browse_file_IMGdbl)
         self.file_IMGdbl_button.grid(row=2, column=2, padx=10, pady=10)
 
-        # Integer input
-        self.int_label = tk.Label(self.root, text="Enter an Integer:")
-        self.int_entry = tk.Entry(self.root,
-                                  textvariable=self.integer_value,
-                                  width=10)
         # SEQDBL selector
         self.seqdbl_dir_label = tk.Label(self.root, text="Directory:")
         self.seqdbl_dir_label.grid(row=2, column=0, padx=10, pady=10)
@@ -88,8 +86,45 @@ class FrameImageApp:
                                            command=self.browse_seqdbl_dir)
         self.seqdbl_dir_button.grid(row=2, column=2, padx=10, pady=10)
 
+        # SEQ selector
+        # Integer_debut input
+        self.int_debut_label = tk.Label(self.root, text="Enter an Integer:")
+        self.int_debut_entry = tk.Entry(self.root,
+                                        textvariable=self.int_deb_value,
+                                        width=10)
+        self.int_debut_label.grid(row=1, column=0, padx=10, pady=10)
+        self.int_debut_entry.grid(row=1, column=1, padx=10, pady=10)
+
+        # Integer_inter input
+        self.int_inter_label = tk.Label(self.root, text="Enter an Integer:")
+        self.int_inter_entry = tk.Entry(self.root,
+                                        textvariable=self.int_inter_value,
+                                        width=10)
+        self.int_inter_label.grid(row=2, column=0, padx=10, pady=10)
+        self.int_inter_entry.grid(row=2, column=1, padx=10, pady=10)
+
+        # Integer_fin input
+        self.int_fin_label = tk.Label(self.root, text="Enter an Integer:")
+        self.int_fin_entry = tk.Entry(self.root,
+                                      textvariable=self.int_fin_value,
+                                      width=10)
+        self.int_fin_label.grid(row=3, column=0, padx=10, pady=10)
+        self.int_fin_entry.grid(row=3, column=1, padx=10, pady=10)
+
+        # Dirname selector
+        self.seq_dir_label = tk.Label(self.root, text="Directory:")
+        self.seq_dir_entry = tk.Entry(self.root,
+                                      textvariable=self.seq_dir_path,
+                                      width=40)
+        self.seq_dir_label.grid(row=4, column=0, padx=10, pady=10)
+        self.seq_dir_button = tk.Button(self.root,
+                                        text="Browse",
+                                        command=self.browse_seq_dir)
+        self.seq_dir_entry.grid(row=4, column=1, padx=10, pady=10)
+        self.seq_dir_button.grid(row=4, column=2, padx=10, pady=10)
+
         # Submit button
-        tk.Button(self.root, text="Submit", command=self.submit).grid(row=3,
+        tk.Button(self.root, text="Submit", command=self.submit).grid(row=5,
                                                                       column=1,
                                                                       padx=10,
                                                                       pady=10)
@@ -115,8 +150,15 @@ class FrameImageApp:
             self.seqdbl_dir_entry.grid_remove()
             self.seqdbl_dir_button.grid_remove()
 
-            self.int_label.grid_remove()
-            self.int_entry.grid_remove()
+            self.int_debut_label.grid_remove()
+            self.int_debut_entry.grid_remove()
+            self.int_inter_label.grid_remove()
+            self.int_inter_entry.grid_remove()
+            self.int_fin_label.grid_remove()
+            self.int_fin_entry.grid_remove()
+            self.seq_dir_label.grid_remove()
+            self.seq_dir_entry.grid_remove()
+            self.seq_dir_button.grid_remove()
 
         elif selection == "TWO":
             # Show file 1, hide file 2 and integer input
@@ -135,8 +177,15 @@ class FrameImageApp:
             self.seqdbl_dir_entry.grid_remove()
             self.seqdbl_dir_button.grid_remove()
 
-            self.int_label.grid_remove()
-            self.int_entry.grid_remove()
+            self.int_debut_label.grid_remove()
+            self.int_debut_entry.grid_remove()
+            self.int_inter_label.grid_remove()
+            self.int_inter_entry.grid_remove()
+            self.int_fin_label.grid_remove()
+            self.int_fin_entry.grid_remove()
+            self.seq_dir_label.grid_remove()
+            self.seq_dir_entry.grid_remove()
+            self.seq_dir_button.grid_remove()
 
         elif selection == "DBL":
             # Show file 2, hide file 1 and integer input
@@ -155,8 +204,15 @@ class FrameImageApp:
             self.seqdbl_dir_entry.grid_remove()
             self.seqdbl_dir_button.grid_remove()
 
-            self.int_label.grid_remove()
-            self.int_entry.grid_remove()
+            self.int_debut_label.grid_remove()
+            self.int_debut_entry.grid_remove()
+            self.int_inter_label.grid_remove()
+            self.int_inter_entry.grid_remove()
+            self.int_fin_label.grid_remove()
+            self.int_fin_entry.grid_remove()
+            self.seq_dir_label.grid_remove()
+            self.seq_dir_entry.grid_remove()
+            self.seq_dir_button.grid_remove()
 
         elif selection == "SEQDBL":
             self.fileTWO1_label.grid_remove()
@@ -174,8 +230,15 @@ class FrameImageApp:
             self.seqdbl_dir_entry.grid()
             self.seqdbl_dir_button.grid()
 
-            self.int_label.grid_remove()
-            self.int_entry.grid_remove()
+            self.int_debut_label.grid_remove()
+            self.int_debut_entry.grid_remove()
+            self.int_inter_label.grid_remove()
+            self.int_inter_entry.grid_remove()
+            self.int_fin_label.grid_remove()
+            self.int_fin_entry.grid_remove()
+            self.seq_dir_label.grid_remove()
+            self.seq_dir_entry.grid_remove()
+            self.seq_dir_button.grid_remove()
 
         else:
             # Show integer input, hide file selectors
@@ -194,8 +257,15 @@ class FrameImageApp:
             self.seqdbl_dir_entry.grid_remove()
             self.seqdbl_dir_button.grid_remove()
 
-            self.int_label.grid(row=1, column=0, padx=10, pady=10)
-            self.int_entry.grid(row=1, column=1, padx=10, pady=10)
+            self.int_debut_label.grid()
+            self.int_debut_entry.grid()
+            self.int_inter_label.grid()
+            self.int_inter_entry.grid()
+            self.int_fin_label.grid()
+            self.int_fin_entry.grid()
+            self.seq_dir_label.grid()
+            self.seq_dir_entry.grid()
+            self.seq_dir_button.grid()
 
     def browse_fileTWO1(self):
         file_path = filedialog.askopenfilename(title="Select File 1")
@@ -216,6 +286,11 @@ class FrameImageApp:
         dir_path = filedialog.askdirectory(title="Select Directory")
         if dir_path:
             self.seqdbl_dir_path.set(dir_path)
+
+    def browse_seq_dir(self):
+        dir_path = filedialog.askdirectory(title="Select Directory")
+        if dir_path:
+            self.seq_dir_path.set(dir_path)
 
     def submit(self):
         selection = self.selection.get()
@@ -259,12 +334,25 @@ class FrameImageApp:
                                 f"Option: {selection}\nDir: {seqdbl_dir}")
             parameters.change_variable('Input_SEQDirname', seqdbl_dir)
             parameters.change_variable('Input_typedata', 'SEQDBL')
+
         else:
-            int_value = self.integer_value.get()
+            int_deb_value = self.int_deb_value.get()
+            int_inter_value = self.int_inter_value.get()
+            int_fin_value = self.int_fin_value.get()
+            seq_dir = self.seq_dir_path.get()
+            parameters.change_variable('Input_SEQdebut', int_deb_value)
+            parameters.change_variable('Input_SEQinterImg', int_inter_value)
+            parameters.change_variable('Input_SEQinterPaire', int_fin_value)
+            parameters.change_variable('Input_SEQDirname', seq_dir)
+            parameters.change_variable('Input_typedata', 'SEQ')
             messagebox.showinfo("Submission Successful",
-                                f"Option: {selection}\nInteger: {int_value}")
+                                f"Option: {selection}\nInt: {int_deb_value}" +
+                                f"Int: {int_inter_value}" +
+                                f"Int: {int_fin_value}" +
+                                f"Dir: {seq_dir}")
 
         self.root.destroy()
+
 
 if __name__ == "__main__":
     root = tk.Tk()
