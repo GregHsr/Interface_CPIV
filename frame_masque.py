@@ -12,6 +12,7 @@ class FrameImageApp:
         self.fileTWO1_path = tk.StringVar()
         self.fileTWO2_path = tk.StringVar()
         self.file_IMGdbl_path = tk.StringVar()
+        self.seqdbl_dir_path = tk.StringVar()
         self.integer_value = tk.IntVar(value=0)
 
         self.options_typedata = ["TWO", "DBL", "SEQDBL", "SEQ"]
@@ -75,6 +76,17 @@ class FrameImageApp:
         self.int_entry = tk.Entry(self.root,
                                   textvariable=self.integer_value,
                                   width=10)
+        # SEQDBL selector
+        self.seqdbl_dir_label = tk.Label(self.root, text="Directory:")
+        self.seqdbl_dir_label.grid(row=2, column=0, padx=10, pady=10)
+        self.seqdbl_dir_entry = tk.Entry(self.root,
+                                         textvariable=self.seqdbl_dir_path,
+                                         width=40)
+        self.seqdbl_dir_entry.grid(row=2, column=1, padx=10, pady=10)
+        self.seqdbl_dir_button = tk.Button(self.root,
+                                           text="Browse",
+                                           command=self.browse_seqdbl_dir)
+        self.seqdbl_dir_button.grid(row=2, column=2, padx=10, pady=10)
 
         # Submit button
         tk.Button(self.root, text="Submit", command=self.submit).grid(row=3,
@@ -99,6 +111,10 @@ class FrameImageApp:
             self.file_IMGdbl_entry.grid_remove()
             self.file_IMGdbl_button.grid_remove()
 
+            self.seqdbl_dir_label.grid_remove()
+            self.seqdbl_dir_entry.grid_remove()
+            self.seqdbl_dir_button.grid_remove()
+
             self.int_label.grid_remove()
             self.int_entry.grid_remove()
 
@@ -114,6 +130,10 @@ class FrameImageApp:
             self.file_IMGdbl_label.grid_remove()
             self.file_IMGdbl_entry.grid_remove()
             self.file_IMGdbl_button.grid_remove()
+
+            self.seqdbl_dir_label.grid_remove()
+            self.seqdbl_dir_entry.grid_remove()
+            self.seqdbl_dir_button.grid_remove()
 
             self.int_label.grid_remove()
             self.int_entry.grid_remove()
@@ -131,6 +151,29 @@ class FrameImageApp:
             self.file_IMGdbl_entry.grid()
             self.file_IMGdbl_button.grid()
 
+            self.seqdbl_dir_label.grid_remove()
+            self.seqdbl_dir_entry.grid_remove()
+            self.seqdbl_dir_button.grid_remove()
+
+            self.int_label.grid_remove()
+            self.int_entry.grid_remove()
+
+        elif selection == "SEQDBL":
+            self.fileTWO1_label.grid_remove()
+            self.fileTWO1_entry.grid_remove()
+            self.fileTWO1_button.grid_remove()
+            self.fileTWO2_label.grid_remove()
+            self.fileTWO2_entry.grid_remove()
+            self.fileTWO2_button.grid_remove()
+
+            self.file_IMGdbl_label.grid_remove()
+            self.file_IMGdbl_entry.grid_remove()
+            self.file_IMGdbl_button.grid_remove()
+
+            self.seqdbl_dir_label.grid()
+            self.seqdbl_dir_entry.grid()
+            self.seqdbl_dir_button.grid()
+
             self.int_label.grid_remove()
             self.int_entry.grid_remove()
 
@@ -146,6 +189,10 @@ class FrameImageApp:
             self.file_IMGdbl_label.grid_remove()
             self.file_IMGdbl_entry.grid_remove()
             self.file_IMGdbl_button.grid_remove()
+
+            self.seqdbl_dir_label.grid_remove()
+            self.seqdbl_dir_entry.grid_remove()
+            self.seqdbl_dir_button.grid_remove()
 
             self.int_label.grid(row=1, column=0, padx=10, pady=10)
             self.int_entry.grid(row=1, column=1, padx=10, pady=10)
@@ -165,6 +212,11 @@ class FrameImageApp:
         if file_path:
             self.file_IMGdbl_path.set(file_path)
 
+    def browse_seqdbl_dir(self):
+        dir_path = filedialog.askdirectory(title="Select Directory")
+        if dir_path:
+            self.seqdbl_dir_path.set(dir_path)
+
     def submit(self):
         selection = self.selection.get()
 
@@ -182,6 +234,9 @@ class FrameImageApp:
                 messagebox.showerror("Error", "Please select File 2.")
                 return
             state = "Submission Successful"
+            parameters.change_variable('Input_ImgTWO1', fileTWO1)
+            parameters.change_variable('Input_ImgTWO2', fileTWO2)
+            parameters.change_variable('Input_typedata', 'TWO')
             messagebox.showinfo(state)
 
         elif selection == "DBL":
@@ -189,17 +244,32 @@ class FrameImageApp:
             if not file_IMGdbl:
                 messagebox.showerror("Error", "Please select File 2.")
                 return
+            parameters.change_variable('Input_Imgdouble', file_IMGdbl)
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nFile 2: {file_IMGdbl}")
+            parameters.change_variable('Input_Imgdouble', file_IMGdbl)
+            parameters.change_variable('Input_typedata', 'DBL')
 
+        elif selection == "SEQDBL":
+            seqdbl_dir = self.seqdbl_dir_path.get()
+            if not seqdbl_dir:
+                messagebox.showerror("Error", "Please select Directory.")
+                return
+            messagebox.showinfo("Submission Successful",
+                                f"Option: {selection}\nDir: {seqdbl_dir}")
+            parameters.change_variable('Input_SEQDirname', seqdbl_dir)
+            parameters.change_variable('Input_typedata', 'SEQDBL')
         else:
             int_value = self.integer_value.get()
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nInteger: {int_value}")
 
+        self.root.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
     parameters = data_file()
+    parameters.read_pandas()
     app = FrameImageApp(root, parameters)
     root.mainloop()
+    parameters.write_file()
