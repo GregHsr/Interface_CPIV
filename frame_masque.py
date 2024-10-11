@@ -7,6 +7,7 @@ class FrameMasqueApp:
     def __init__(self, root, parameters):
         self.root = root
         self.root.title("File Selector")
+        self.params = parameters
 
         self.bool_selection = tk.StringVar(value="Choose an option")
         self.typemenu_selection = tk.StringVar(value="Choose an option")
@@ -102,7 +103,7 @@ class FrameMasqueApp:
             self.file_Seq_button.grid()
 
     def browse_file_One(self):
-        file_path = filedialog.askopenfilename(title="Select File 2")
+        file_path = filedialog.askopenfilename(title="Select File")
         if file_path:
             self.file_One_path.set(file_path)
 
@@ -144,6 +145,42 @@ class FrameMasqueApp:
             self.update_file_Seq("hide")
 
     def submit(self):
+        selection = self.bool_selection.get()
+        if selection == "Choose an option":
+            messagebox.showerror("Error","Please select an option.")
+            return
+
+        elif selection == "NO":
+            bool_sel = self.bool_selection.get()
+            if not bool_sel:
+                messagebox.showerror("Error", "Please select an option.")
+                return
+            state = "Submission Successful"
+            self.params.change_variable('CalculCPIV_ROI', 'NO')
+            messagebox.showinfo(state)
+
+        elif selection == "YES":
+            bool_sel = self.bool_selection.get()
+            seq_path = self.file_One_path.get()
+            one_path = self.file_Seq_path.get()
+            if not seq_path and not one_path:
+                messagebox.showerror("Error", "Please select an option.")
+                return
+            elif not seq_path:
+                self.params.change_variable('Input_TypeMasque', one_path)
+                self.params.change_variable('CalculCPIV_ROI', 'OK')
+            elif not one_path:
+                self.params.change_variable('Input_TypeMasque', seq_path)
+                self.params.change_variable('CalculCPIV_ROI', 'OK')
+            else:
+                messagebox.showerror("Error","An unknown error occured, please reload")
+                return
+            messagebox.showinfo("Submission Successful")
+
+        else:
+            messagebox.showerror("Error","An unknown error occured, please reload")
+            return
+
         self.root.destroy()
 
 if __name__ == "__main__":

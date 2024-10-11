@@ -8,7 +8,9 @@ if __name__ == "__main__":
     parameters = data_file()
     parameters.read_pandas()    
     frame_image.FrameImageApp(root, parameters)
+    root.mainloop()
+
+    root = tk.Tk()
     frame_masque.FrameMasqueApp(root, parameters)
     parameters.write_file()
     root.mainloop()
-

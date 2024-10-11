@@ -7,6 +7,7 @@ class FrameImageApp:
     def __init__(self, root, parameters):
         self.root = root
         self.root.title("File Selector")
+        self.params = parameters
 
         self.selection = tk.StringVar(value="Choose an option")
         self.fileTWO1_path = tk.StringVar()
@@ -309,9 +310,9 @@ class FrameImageApp:
                 messagebox.showerror("Error", "Please select File 2.")
                 return
             state = "Submission Successful"
-            parameters.change_variable('Input_ImgTWO1', fileTWO1)
-            parameters.change_variable('Input_ImgTWO2', fileTWO2)
-            parameters.change_variable('Input_typedata', 'TWO')
+            self.params.change_variable('Input_ImgTWO1', fileTWO1)
+            self.params.change_variable('Input_ImgTWO2', fileTWO2)
+            self.params.change_variable('Input_typedata', 'TWO')
             messagebox.showinfo(state)
 
         elif selection == "DBL":
@@ -319,11 +320,11 @@ class FrameImageApp:
             if not file_IMGdbl:
                 messagebox.showerror("Error", "Please select File 2.")
                 return
-            parameters.change_variable('Input_Imgdouble', file_IMGdbl)
+            self.params.change_variable('Input_Imgdouble', file_IMGdbl)
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nFile 2: {file_IMGdbl}")
-            parameters.change_variable('Input_Imgdouble', file_IMGdbl)
-            parameters.change_variable('Input_typedata', 'DBL')
+            self.params.change_variable('Input_Imgdouble', file_IMGdbl)
+            self.params.change_variable('Input_typedata', 'DBL')
 
         elif selection == "SEQDBL":
             seqdbl_dir = self.seqdbl_dir_path.get()
@@ -332,19 +333,19 @@ class FrameImageApp:
                 return
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nDir: {seqdbl_dir}")
-            parameters.change_variable('Input_SEQDirname', seqdbl_dir)
-            parameters.change_variable('Input_typedata', 'SEQDBL')
+            self.params.change_variable('Input_SEQDirname', seqdbl_dir)
+            self.params.change_variable('Input_typedata', 'SEQDBL')
 
         else:
             int_deb_value = self.int_deb_value.get()
             int_inter_value = self.int_inter_value.get()
             int_fin_value = self.int_fin_value.get()
             seq_dir = self.seq_dir_path.get()
-            parameters.change_variable('Input_SEQdebut', int_deb_value)
-            parameters.change_variable('Input_SEQinterImg', int_inter_value)
-            parameters.change_variable('Input_SEQinterPaire', int_fin_value)
-            parameters.change_variable('Input_SEQDirname', seq_dir)
-            parameters.change_variable('Input_typedata', 'SEQ')
+            self.params.change_variable('Input_SEQdebut', int_deb_value)
+            self.params.change_variable('Input_SEQinterImg', int_inter_value)
+            self.params.change_variable('Input_SEQinterPaire', int_fin_value)
+            self.params.change_variable('Input_SEQDirname', seq_dir)
+            self.params.change_variable('Input_typedata', 'SEQ')
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nInt: {int_deb_value}" +
                                 f"Int: {int_inter_value}" +
