@@ -156,7 +156,7 @@ class FrameMasqueApp:
                 messagebox.showerror("Error", "Please select an option.")
                 return
             state = "Submission Successful"
-            self.params.change_variable('CalculCPIV_ROI', 'NO')
+            self.params.change_variable('Input_Masque', 'NO')
             messagebox.showinfo(state)
 
         elif selection == "YES":
@@ -167,11 +167,13 @@ class FrameMasqueApp:
                 messagebox.showerror("Error", "Please select an option.")
                 return
             elif not seq_path:
-                self.params.change_variable('Input_TypeMasque', one_path)
-                self.params.change_variable('CalculCPIV_ROI', 'OK')
+                self.params.change_variable('Input_TypeMasque', 'ONE')
+                self.params.change_variable('Input_Masque', 'OK')
+                self.params.change_variable('Input_OneNameMasque', one_path)
             elif not one_path:
-                self.params.change_variable('Input_TypeMasque', seq_path)
-                self.params.change_variable('CalculCPIV_ROI', 'OK')
+                self.params.change_variable('Input_TypeMasque', 'SEQ')
+                self.params.change_variable('Input_Masque', 'OK')
+                self.params.change_variable('Input_SeqDirMasque', seq_path)
             else:
                 messagebox.showerror("Error","An unknown error occured, please reload")
                 return
