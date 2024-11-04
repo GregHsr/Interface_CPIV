@@ -1,10 +1,12 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from data_writer import data_file
+from security import Security
 
 
-class FrameImageApp:
+class FrameImageApp(Security):
     def __init__(self, root, parameters):
+        super().__init__()
         self.root = root
         self.root.title("File Selector")
         self.params = parameters
@@ -92,7 +94,9 @@ class FrameImageApp:
         self.int_debut_label = tk.Label(self.root, text="Input_SEQdebut:")
         self.int_debut_entry = tk.Entry(self.root,
                                         textvariable=self.int_deb_value,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_debut_label.grid(row=1, column=0, padx=10, pady=10)
         self.int_debut_entry.grid(row=1, column=1, padx=10, pady=10)
 
@@ -100,7 +104,9 @@ class FrameImageApp:
         self.int_inter_label = tk.Label(self.root, text="Input_SEQinterImg:")
         self.int_inter_entry = tk.Entry(self.root,
                                         textvariable=self.int_inter_value,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_inter_label.grid(row=2, column=0, padx=10, pady=10)
         self.int_inter_entry.grid(row=2, column=1, padx=10, pady=10)
 
@@ -108,7 +114,9 @@ class FrameImageApp:
         self.int_fin_label = tk.Label(self.root, text="Input_SEQPaire:")
         self.int_fin_entry = tk.Entry(self.root,
                                       textvariable=self.int_fin_value,
-                                      width=10)
+                                      width=10,
+                                      validate="key",
+                                      validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_fin_label.grid(row=3, column=0, padx=10, pady=10)
         self.int_fin_entry.grid(row=3, column=1, padx=10, pady=10)
 
@@ -269,17 +277,20 @@ class FrameImageApp:
             self.seq_dir_button.grid()
 
     def browse_fileTWO1(self):
-        file_path = filedialog.askopenfilename(title="Select File 1")
+        file_path = filedialog.askopenfilename(title="Select File 1",
+                                               filetypes=[("Image Files","*.tif")])
         if file_path:
             self.fileTWO1_path.set(file_path)
 
     def browse_fileTWO2(self):
-        file_path = filedialog.askopenfilename(title="Select File 2")
+        file_path = filedialog.askopenfilename(title="Select File 2",
+                                               filetypes=[("Image Files","*.tif")])
         if file_path:
             self.fileTWO2_path.set(file_path)
 
     def browse_file_IMGdbl(self):
-        file_path = filedialog.askopenfilename(title="Select File 2")
+        file_path = filedialog.askopenfilename(title="Select File 2",
+                                               filetypes=[("Image Files","*.tif")])
         if file_path:
             self.file_IMGdbl_path.set(file_path)
 
@@ -304,21 +315,30 @@ class FrameImageApp:
             fileTWO1 = self.fileTWO1_path.get()
             fileTWO2 = self.fileTWO2_path.get()
             if not fileTWO1:
-                messagebox.showerror("Error", "Please select File 1.")
+                messagebox.showerror("Error", "Please select TIF image for file 1.")
                 return
             if not fileTWO2:
-                messagebox.showerror("Error", "Please select File 2.")
+                messagebox.showerror("Error", "Please select TIF image for file 2.")
+                return
+            if Security.check_tiffile(self, fileTWO1)==False:
+                messagebox.showerror("Error", "Please select a valid TIF image for file 1.")
+                return
+            if Security.check_tiffile(self, fileTWO2)==False:
+                messagebox.showerror("Error", "Please select a valid TIF image for file 2.")
                 return
             state = "Submission Successful"
             self.params.change_variable('Input_ImgTWO1', fileTWO1)
             self.params.change_variable('Input_ImgTWO2', fileTWO2)
             self.params.change_variable('Input_typedata', 'TWO')
-            messagebox.showinfo(state)
+            messagebox.showinfo("Info",state)
 
         elif selection == "DBL":
             file_IMGdbl = self.file_IMGdbl_path.get()
             if not file_IMGdbl:
-                messagebox.showerror("Error", "Please select File 2.")
+                messagebox.showerror("Error", "Please select a TIF image.")
+                return
+            if Security.check_tiffile(self, file_IMGdbl)==False:
+                messagebox.showerror("Error", "Please select a valid TIF image.")
                 return
             self.params.change_variable('Input_Imgdouble', file_IMGdbl)
             messagebox.showinfo("Submission Successful",
@@ -331,25 +351,47 @@ class FrameImageApp:
             if not seqdbl_dir:
                 messagebox.showerror("Error", "Please select Directory.")
                 return
+            if Security.check_directory(self, seqdbl_dir)==False:
+                messagebox.showerror("Error", "Please select a valid Directory.")
+                return
             messagebox.showinfo("Submission Successful",
                                 f"Option: {selection}\nDir: {seqdbl_dir}")
             self.params.change_variable('Input_SEQDirname', seqdbl_dir)
             self.params.change_variable('Input_typedata', 'SEQDBL')
 
         else:
-            int_deb_value = self.int_deb_value.get()
-            int_inter_value = self.int_inter_value.get()
-            int_fin_value = self.int_fin_value.get()
+            try:
+                int_deb_value = self.int_deb_value.get()
+                int_inter_value = self.int_inter_value.get()
+                int_fin_value = self.int_fin_value.get()
+                print(int_deb_value, int_inter_value, int_fin_value)
+            except:
+                messagebox.showerror("Error", "Please enter valid integers.")
+                return
+            
             seq_dir = self.seq_dir_path.get()
+
+            if not seq_dir:
+                messagebox.showerror("Error", "Please select Directory.")
+                return
+            if Security.check_directory(self, seq_dir)==False:
+                messagebox.showerror("Error", "Please select a valid Directory.")
+                return
+            for k in [int_deb_value, int_inter_value, int_fin_value]:
+                if Security.check_int(self, k)==False:
+                    messagebox.showerror("Error", f"Please enter valid integers for {k}.")
+                    return
+            
             self.params.change_variable('Input_SEQdebut', int_deb_value)
             self.params.change_variable('Input_SEQinterImg', int_inter_value)
             self.params.change_variable('Input_SEQinterPaire', int_fin_value)
             self.params.change_variable('Input_SEQDirname', seq_dir)
             self.params.change_variable('Input_typedata', 'SEQ')
             messagebox.showinfo("Submission Successful",
-                                f"Option: {selection}\nInt: {int_deb_value}" +
-                                f"Int: {int_inter_value}" +
-                                f"Int: {int_fin_value}" +
+                                f"Option: {selection}\n" + 
+                                f"Int: {int_deb_value}\n" +
+                                f"Int: {int_inter_value}\n" +
+                                f"Int: {int_fin_value}\n" +
                                 f"Dir: {seq_dir}")
 
         self.root.destroy()
