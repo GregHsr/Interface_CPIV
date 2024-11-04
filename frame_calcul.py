@@ -44,7 +44,7 @@ class FrameCalculApp:
                                                                          column=1,
                                                                          padx=10,
                                                                          pady=10)
-        
+
         # Integer X input
         self.int_xinput_label = tk.Label(self.root, text="Dim X:")
         self.int_xinput_entry = tk.Entry(self.root,
@@ -74,7 +74,7 @@ class FrameCalculApp:
         self.floaty_entry.grid(row=2, column=3, padx=10, pady=10)
 
         # Dropdown
-        self.menu_ROI_label = tk.Label(self.root, 
+        self.menu_ROI_label = tk.Label(self.root,
                                        text="Region of interest:").grid(row=3,
                                                                         column=0,
                                                                         padx=10,
@@ -119,7 +119,7 @@ class FrameCalculApp:
         self.int_y2roi_entry.grid(row=5, column=3, padx=10, pady=10)
 
         # Dropdown outil conv
-        self.menu_outilconv_label = tk.Label(self.root, 
+        self.menu_outilconv_label = tk.Label(self.root,
                                              text="Outil de convergence:").grid(row=6,
                                                                               column=0,
                                                                               padx=10,
@@ -132,7 +132,7 @@ class FrameCalculApp:
                                                                               pady=10)
 
         # Dropdown filtre postcalc
-        self.menu_filtrepostcalc_label = tk.Label(self.root, 
+        self.menu_filtrepostcalc_label = tk.Label(self.root,
                                                   text="Filtre post-calcul:").grid(row=7,
                                                                                   column=0,
                                                                                   padx=10,
@@ -143,9 +143,9 @@ class FrameCalculApp:
                                                                                     column=1,
                                                                                     padx=10,
                                                                                     pady=10)
-        
+
         # Dropdown suivi calc
-        self.menu_suivicalc_label = tk.Label(self.root, 
+        self.menu_suivicalc_label = tk.Label(self.root,
                                              text="Suivi calcul:").grid(row=8,
                                                                        column=0,
                                                                        padx=10,
@@ -156,7 +156,7 @@ class FrameCalculApp:
                                                                               column=1,
                                                                               padx=10,
                                                                               pady=10)
-        
+
         # Integer vector input
         self.int_vecx_label = tk.Label(self.root, text="Vecteur X:")
         self.int_vecx_entry = tk.Entry(self.root,
@@ -242,7 +242,7 @@ class FrameCalculApp:
                 return
         else :
             self.params.change_variable('CalculCPIV_meths', self.type_meth_selection.get())
-      
+
         dimX = self.int_dimx.get()
         dimY = self.int_dimy.get()
         if dimX == 0 or dimY == 0:

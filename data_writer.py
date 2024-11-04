@@ -9,7 +9,16 @@ class data_file:
         self.param_file = 'param.txt'
 
     def write_file(self):
-        self.data.to_csv(self.param_file,
+        # Identify the indices of rows where 'Value' is the string "None"
+        df = self.data
+        # Strip whitespace from the 'Value' column
+        df['Value'] = df['Value'].str.strip()
+        # Replace string "None" with actual None
+        df['Value'] = df['Value'].replace('None', None)
+        # Drop rows where the 'Value' column is None
+        df_cleaned = df.dropna(subset=['Value'])
+        # Write the cleaned dataframe to a new file
+        df_cleaned.to_csv(self.param_file,
                          sep='\t',
                          index=False,
                          header=False)

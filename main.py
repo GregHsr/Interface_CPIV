@@ -5,9 +5,10 @@ from data_writer import data_file
 import tkinter as tk
 
 if __name__ == "__main__":
-    root = tk.Tk()
     parameters = data_file()
-    parameters.read_pandas()    
+    parameters.read_pandas()   
+
+    root = tk.Tk()
     frame_image.FrameImageApp(root, parameters)
     root.mainloop()
 
