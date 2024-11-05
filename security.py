@@ -53,15 +53,22 @@ class Security:
     
     def validate_int(self, new_value):
         if new_value == "":
-            self.int_correct = False
             return True
         if re.fullmatch(r"-?\d+", new_value):
-            self.int_correct = True
             return True
         else:
             messagebox.showwarning("Invalid input", "Please enter a valid integer.")
             return False
 
+    def validate_float(self, new_value):
+        if new_value == "": 
+            return True
+        try:
+            float(new_value)  
+            return True
+        except ValueError:
+            messagebox.showerror("Invalid input", "Please enter a valid float.")
+            return False
 
 if __name__ == '__main__':
     sec = Security()

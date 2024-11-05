@@ -1,10 +1,12 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from data_writer import data_file
+from security import Security
 
 
-class FrameCalculApp:
+class FrameCalculApp(Security):
     def __init__(self, root, parameters):
+        super().__init__()
         self.root = root
         self.root.title("File Selector")
         self.params = parameters
@@ -49,7 +51,9 @@ class FrameCalculApp:
         self.int_xinput_label = tk.Label(self.root, text="Dim X:")
         self.int_xinput_entry = tk.Entry(self.root,
                                         textvariable=self.int_dimx,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_xinput_label.grid(row=1, column=0, padx=10, pady=10)
         self.int_xinput_entry.grid(row=1, column=1, padx=10, pady=10)
 
@@ -57,7 +61,9 @@ class FrameCalculApp:
         self.int_yinput_label = tk.Label(self.root, text="Dim Y:")
         self.int_yinput_entry = tk.Entry(self.root,
                                         textvariable=self.int_dimy,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_yinput_label.grid(row=1, column=2, padx=10, pady=10)
         self.int_yinput_entry.grid(row=1, column=3, padx=10, pady=10)
 
@@ -65,12 +71,16 @@ class FrameCalculApp:
         self.floatx_label = tk.Label(self.root, text="Recouvrement:")
         self.floatx_entry = tk.Entry(self.root,
                                     textvariable=self.float_recouvrx,
-                                    width=10)
+                                    width=10,
+                                    validate="key",
+                                    validatecommand=(self.root.register(self.validate_float), '%P'))
         self.floatx_label.grid(row=2, column=0, padx=10, pady=10)
         self.floatx_entry.grid(row=2, column=1, padx=10, pady=10)
         self.floaty_entry = tk.Entry(self.root,
                                      textvariable=self.float_recouvry,
-                                     width=10)
+                                     width=10,
+                                     validate="key",
+                                     validatecommand=(self.root.register(self.validate_float), '%P'))
         self.floaty_entry.grid(row=2, column=3, padx=10, pady=10)
 
         # Dropdown
@@ -90,7 +100,9 @@ class FrameCalculApp:
         self.int_x1roi_label = tk.Label(self.root, text="X1:")
         self.int_x1roi_entry = tk.Entry(self.root,
                                         textvariable=self.int_roix1,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_x1roi_label.grid(row=4, column=0, padx=10, pady=10)
         self.int_x1roi_entry.grid(row=4, column=1, padx=10, pady=10)
 
@@ -98,7 +110,9 @@ class FrameCalculApp:
         self.int_x2roi_label = tk.Label(self.root, text="X2:")
         self.int_x2roi_entry = tk.Entry(self.root,
                                         textvariable=self.int_roix2,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_x2roi_label.grid(row=4, column=2, padx=10, pady=10)
         self.int_x2roi_entry.grid(row=4, column=3, padx=10, pady=10)
 
@@ -106,7 +120,9 @@ class FrameCalculApp:
         self.int_y1roi_label = tk.Label(self.root, text="Y1:")
         self.int_y1roi_entry = tk.Entry(self.root,
                                         textvariable=self.int_roiy1,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_y1roi_label.grid(row=5, column=0, padx=10, pady=10)
         self.int_y1roi_entry.grid(row=5, column=1, padx=10, pady=10)
 
@@ -114,7 +130,9 @@ class FrameCalculApp:
         self.int_y2roi_label = tk.Label(self.root, text="Y2:")
         self.int_y2roi_entry = tk.Entry(self.root,
                                         textvariable=self.int_roiy2,
-                                        width=10)
+                                        width=10,
+                                        validate="key",
+                                        validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_y2roi_label.grid(row=5, column=2, padx=10, pady=10)
         self.int_y2roi_entry.grid(row=5, column=3, padx=10, pady=10)
 
@@ -161,13 +179,17 @@ class FrameCalculApp:
         self.int_vecx_label = tk.Label(self.root, text="Vecteur X:")
         self.int_vecx_entry = tk.Entry(self.root,
                                        textvariable=self.vecx,
-                                       width=10)
+                                       width=10,
+                                       validate="key",
+                                       validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_vecx_label.grid(row=9, column=0, padx=10, pady=10)
         self.int_vecx_entry.grid(row=9, column=1, padx=10, pady=10)
         self.int_vecy_label = tk.Label(self.root, text="Vecteur Y:")
         self.int_vecy_entry = tk.Entry(self.root,
                                        textvariable=self.vecy,
-                                       width=10)
+                                       width=10,
+                                       validate="key",
+                                       validatecommand=(self.root.register(self.validate_int), '%P'))
         self.int_vecy_label.grid(row=9, column=2, padx=10, pady=10)
         self.int_vecy_entry.grid(row=9, column=3, padx=10, pady=10)
 
@@ -292,14 +314,14 @@ class FrameCalculApp:
             return
         else:
             if self.bool_suivi_calc.get() == "YES":
-                vecx = self.vecx.get()
-                vecy = self.vecy.get()
-                if vecx == 0 or vecy == 0:
+                vec_x = self.vecx.get()
+                vec_y = self.vecy.get()
+                if vec_x == 0 or vec_y == 0:
                     messagebox.showerror("Error", "Please enter the vector values")
                     return
                 else:
-                    self.params.change_variable('CalculCPIV_VecX', vecx)
-                    self.params.change_variable('CalculCPIV_VecY', vecy)
+                    self.params.change_variable('CalculCPIV_VecX', str(vec_x))
+                    self.params.change_variable('CalculCPIV_VecY', str(vec_y))
             self.params.change_variable('CalculCPIV_SuiviCalcul', self.bool_suivi_calc.get())
 
         self.root.destroy()
