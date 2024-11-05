@@ -275,8 +275,14 @@ class FrameCalculApp(Security):
 
         recouvrx = self.float_recouvrx.get()
         recouvry = self.float_recouvry.get()
-        if recouvrx == 0. or recouvry == 0.:
-            messagebox.showerror("Error", "Please enter the recouvrement values")
+        if recouvrx == 0. and recouvry == 0.:
+            proceed = self.ask_validation("Recouvrement values are still at 0, is this what you want?")
+            if proceed == False:
+                return
+            else:
+                self.params.change_variable('CalculCPIV_recouv', f'{recouvrx} {recouvry}')
+        elif recouvrx >= 1. or recouvry == 1.:
+            messagebox.showerror("Error", "Recouvrement values must be less than 1")
             return
         else:
             self.params.change_variable('CalculCPIV_recouv', f'{recouvrx} {recouvry}')

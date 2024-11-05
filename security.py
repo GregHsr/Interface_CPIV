@@ -46,7 +46,7 @@ class Security:
         else:
             return False
         
-    def ask_validdation(self, message):
+    def ask_validation(self, message):
         # Yes or no window
         answer = messagebox.askyesno('Validation', message)
         return answer
@@ -77,4 +77,4 @@ if __name__ == '__main__':
     print(sec.check_int('12.5'))
     print(sec.check_float('12.5'))
     print(sec.check_string(12.5))
-    sec.ask_validdation('This is a test message')
+    sec.ask_validation('This is a test message')
