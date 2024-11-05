@@ -1,10 +1,11 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from data_writer import data_file
+from security import Security
 
-
-class FrameMasqueApp:
+class FrameMasqueApp(Security):
     def __init__(self, root, parameters):
+        super().__init__()
         self.root = root
         self.root.title("File Selector")
         self.params = parameters
@@ -103,7 +104,8 @@ class FrameMasqueApp:
             self.file_Seq_button.grid()
 
     def browse_file_One(self):
-        file_path = filedialog.askopenfilename(title="Select File")
+        file_path = filedialog.askopenfilename(title="Select File",
+                                               filetypes=[("Image Files","*.tif")])
         if file_path:
             self.file_One_path.set(file_path)
 
@@ -157,27 +159,34 @@ class FrameMasqueApp:
                 return
             state = "Submission Successful"
             self.params.change_variable('Input_Masque', 'NO')
-            messagebox.showinfo(state)
+            messagebox.showinfo(state, "No Mask selected")
 
         elif selection == "YES":
             bool_sel = self.bool_selection.get()
-            seq_path = self.file_One_path.get()
-            one_path = self.file_Seq_path.get()
+            one_path = self.file_One_path.get()
+            seq_path = self.file_Seq_path.get()
+
             if not seq_path and not one_path:
                 messagebox.showerror("Error", "Please select an option.")
                 return
             elif not seq_path:
+                if Security.check_tiffile(self, one_path) == False:
+                    messagebox.showerror("Error", "Please select a valid TIF image.")
+                    return
                 self.params.change_variable('Input_TypeMasque', 'ONE')
                 self.params.change_variable('Input_Masque', 'OK')
                 self.params.change_variable('Input_OneNameMasque', one_path)
             elif not one_path:
+                if Security.check_directory(self, seq_path) == False:
+                    messagebox.showerror("Error", "Please select a valid directory.")
+                    return
                 self.params.change_variable('Input_TypeMasque', 'SEQ')
                 self.params.change_variable('Input_Masque', 'OK')
                 self.params.change_variable('Input_SeqDirMasque', seq_path)
             else:
                 messagebox.showerror("Error","An unknown error occured, please reload")
                 return
-            messagebox.showinfo("Submission Successful")
+            messagebox.showinfo("Submission Successful", "Mask selected")
 
         else:
             messagebox.showerror("Error","An unknown error occured, please reload")
