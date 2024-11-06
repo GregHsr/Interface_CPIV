@@ -1,6 +1,6 @@
 import os
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import messagebox, Toplevel, Text, Scrollbar
 import re
 
 class Security:
@@ -69,6 +69,48 @@ class Security:
         except ValueError:
             messagebox.showerror("Invalid input", "Please enter a valid float.")
             return False
+
+
+    def show_help(self):
+        # Create a new top-level window for help
+        help_window = Toplevel(self.root)
+        help_window.title("Help")
+
+        help_text = Text(help_window, wrap="word", padx=10, pady=10)
+        help_text.insert("1.0", self.get_help_text())  # Insert help text
+        help_text.config(state="disabled")  # Make text read-only
+
+        scrollbar = Scrollbar(help_window, command=help_text.yview)
+        help_text.configure(yscrollcommand=scrollbar.set)
+
+        scrollbar.pack(side="right", fill="y")
+        help_text.pack(expand=True, fill="both")
+
+    def get_help_text(self):
+        return ( 
+            "Input_typedata : Deux images simples, Une image double, Séquence d'images double ou Sequence d'images simples \n"
+            "Input_SEQDirname : Directory\n"
+            "Input_SEQdebut : Integer\n"
+            "Input_SEQinterImg : Integer\n"
+            "Input_SEQinterPaire : Integer\n"
+            "Input_Imgdouble : TIF image\n"
+            "Input_ImgTWO1 : TIF image\n"
+            "Input_ImgTWO2 : TIF image\n"
+            "Input_Masque : YES / NO\n"
+            "Input_TypeMasque : ONE / SEQUENCE\n"
+            "Input_OneNameMasque : TIF image\n"
+            "Input_SeqDirMasque : Directory\n"
+            "CalculCPIV_meths : PIVDEFORM | PIVDECAL | PIVSIMPLE\n"
+            "CalculCPIV_dimXYcell : Integers\n"
+            "CalculCPIV_recouv : floats between 0 et 1 non compris, ex: 0,5 => recovery of 50%\n"
+            "CalculCPIV_ROI : YES / NO\n"
+            "CalculCPIV_ROIval : 4 integers: (x0, y0) for the top-left corner and (x1, y1) for the bottom-right corner, where x1>x0x1>x0 and y1>y0y1>y0.\n"
+            "CalculCPIV_ConvTools : YES / NO\n"
+            "CalculCPIV_FiltrePostCalcul : YES / NO\n"
+            "CalculCPIV_SuiviCalcul : YES / NO\n"
+            "CalculCPIV_VecX : Integer\n"
+            "CalculCPIV_VecY : Integer\n"
+        )
 
 if __name__ == '__main__':
     sec = Security()

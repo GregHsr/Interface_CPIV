@@ -26,6 +26,10 @@ class FrameImageApp(Security):
         self.create_widgets()
 
     def create_widgets(self):
+        # Help button
+        self.help_button = tk.Button(self.root, text="Help", command=self.show_help)
+        self.help_button.grid(row=0, column=3, padx=10, pady=10)
+
         # Label for the dropdown
         tk.Label(self.root, text="Select Option:").grid(row=0,
                                                         column=0,
