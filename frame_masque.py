@@ -7,7 +7,7 @@ class FrameMasqueApp(Security):
     def __init__(self, root, parameters):
         super().__init__()
         self.root = root
-        self.root.title("File Selector")
+        self.root.title("Mask choice")
         self.params = parameters
 
         self.bool_selection = tk.StringVar(value="Choose an option")

@@ -8,7 +8,7 @@ class FrameCalculApp(Security):
     def __init__(self, root, parameters):
         super().__init__()
         self.root = root
-        self.root.title("File Selector")
+        self.root.title("Calcul Parameters")
         self.params = parameters
 
         self.type_meth_selection = tk.StringVar(value="Choose an option")

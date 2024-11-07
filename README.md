@@ -1,4 +1,4 @@
-# Générateur de Fichier de Paramètres pour PIV
+# Générateur de Fichier de Paramètres pour CPIV
 
 ![Python](https://img.shields.io/badge/Python-3.11.5-blue) ![tkinter](https://img.shields.io/badge/tkinter-GUI-orange)
 
@@ -13,7 +13,7 @@
 
 ## Introduction
 
-**Générateur de Fichier de Paramètres pour PIV** est une application basée sur tkinter, conçue pour simplifier la création de fichiers de paramètres destinés au logiciel de Vélocimétrie par Images de Particules CPIV. L'application offre une interface graphique intuitive permettant de configurer les différents paramètres sans avoir à éditer manuellement le fichier de données.
+Le **Générateur de Fichier de Paramètres pour CPIV** est une application basée sur tkinter, conçue pour simplifier la création de fichiers de paramètres destinés au logiciel de Vélocimétrie par Images de Particules CPIV. L'application offre une interface graphique intuitive permettant de configurer les différents paramètres sans avoir à éditer manuellement le fichier de données.
 
 ## Fonctionnalités
 
@@ -49,16 +49,16 @@
      ```bash
      python main.py
 2. **Configurer les paramètres** :
-   - Remplissez chaque champ de saisie avec les valeurs souhaitées pour vos paramètres PIV.
+   - Remplissez chaque champ de saisie avec les valeurs souhaitées pour vos paramètres de CPIV.
 3. **Générer le fichier de paramètres** :
    - Cliquez sur le bouton **Submit** pour valider vos entrées et créer le fichier de paramètres.
    - En cas d'erreur dans les valeurs entrées, un message d'avertissement s'affichera pour vous indiquer les corrections nécessaires.
-    > **Remarque** : Assurez-vous que les valeurs respectent le format attendu par le logiciel de PIV afin d’éviter les erreurs lors de l’importation.   
+    > **Remarque** : Assurez-vous que les valeurs respectent le format attendu par le logiciel CPIV afin d’éviter les erreurs lors de l’importation.   
    - Pour changer une valeur fausse après submission, relancer l'interface et rentrer de nouveau toutes les informations. 
-    > **Important** : Lancer de nouveau l'interface écrase toutes les valeurs présente dans le fichier param.txt
+    > **Important** : Lancer de nouveau l'interface écrase toutes les valeurs présentes dans le fichier param.txt
 
 4. **Consulter l’aide** :
-   - En cas de doute, utilisez le bouton **Help** pour afficher des instructions détaillées sur chaque paramètre configurable.
+   - En cas de doute, utilisez le bouton **Help** pour afficher des instructions détaillées et le type de données attendu sur chaque paramètre configurable.
 
 ## Template de Fichier Généré
 
@@ -88,7 +88,6 @@ CalculCPIV_SuiviCalcul OK | NO
 CalculCPIV_VecX 47 (un entier)
 CalculCPIV_VecY 69 (un entier)
 ```
-> **Note** : Adaptez les valeurs et les sections du fichier selon les spécifications de votre logiciel de PIV.
 
 ## Crédits
 
