@@ -340,7 +340,7 @@ class FrameCalculApp(Security):
                 vec_x = self.vecx.get()
                 vec_y = self.vecy.get()
                 if vec_x == 0 or vec_y == 0:
-                    messagebox.showerror("Error", "Please enter the vector values")
+                    messagebox.showerror("Error", "Please enter the vector values (not 0)")
                     return
                 else:
                     self.params.change_variable('CalculCPIV_VecX', str(vec_x))
