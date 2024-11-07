@@ -1,3 +1,5 @@
+> **Note** : Ce Readme est visible en ligne [ici](https://github.com/GregHsr/Interface_CPIV)
+
 # Générateur de Fichier de Paramètres pour CPIV
 
 ![Python](https://img.shields.io/badge/Python-3.11.5-blue) ![tkinter](https://img.shields.io/badge/tkinter-GUI-orange)
@@ -13,7 +15,7 @@
 
 ## Introduction
 
-Le **Générateur de Fichier de Paramètres pour CPIV** est une application basée sur tkinter, conçue pour simplifier la création de fichiers de paramètres destinés au logiciel de Vélocimétrie par Images de Particules CPIV. L'application offre une interface graphique intuitive permettant de configurer les différents paramètres sans avoir à éditer manuellement le fichier de données.
+Le **Générateur de Fichier de Paramètres pour CPIV** est une application basée sur tkinter, conçue pour créer des fichiers de paramètres destinés au logiciel de Vélocimétrie par Images de Particules CPIV. L'application offre une interface graphique intuitive permettant de configurer les différents paramètres sans avoir à éditer manuellement le fichier de données.
 
 ## Fonctionnalités
 
@@ -39,6 +41,9 @@ Le **Générateur de Fichier de Paramètres pour CPIV** est une application bas�
    ```bash
    git clone https://github.com/GregHsr/Interface_CPIV.git
    cd Interface_CPIV
+   ```
+   ou extraire le code source du dossier compressé.
+
 2. Lancez l'application :
    ```bash
    python main.py
@@ -49,7 +54,7 @@ Le **Générateur de Fichier de Paramètres pour CPIV** est une application bas�
      ```bash
      python main.py
 2. **Configurer les paramètres** :
-   - Remplissez chaque champ de saisie avec les valeurs souhaitées pour vos paramètres de CPIV.
+   - Remplissez chaque champ de saisie avec les valeurs souhaitées pour vos paramètres de PIV.
 3. **Générer le fichier de paramètres** :
    - Cliquez sur le bouton **Submit** pour valider vos entrées et créer le fichier de paramètres.
    - En cas d'erreur dans les valeurs entrées, un message d'avertissement s'affichera pour vous indiquer les corrections nécessaires.
@@ -91,4 +96,4 @@ CalculCPIV_VecY 69 (un entier)
 
 ## Crédits
 
-Cette application a été développée par [Grégoire Husser](https://github.com/GregHsr).
+Cette application a été développée par [Grégoire Husser](https://github.com/GregHsr) dans le cadre du module BES Langage Avancé (ENSEEIHT MFEE-MSN).
