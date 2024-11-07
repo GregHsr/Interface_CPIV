@@ -304,6 +304,12 @@ class FrameCalculApp(Security):
                 if roix1 == 0 or roix2 == 0 or roiy1 == 0 or roiy2 == 0:
                     messagebox.showerror("Error", "Please enter the ROI values")
                     return
+                elif roix1 >= roix2:
+                    messagebox.showerror("Error", "Please respect x0 < x1")
+                    return
+                elif roiy1 >= roiy2:
+                    messagebox.showerror("Error", "Please respect y0 < y1")
+                    return
                 else:
                     self.params.change_variable('CalculCPIV_ROIval', f'{roix1} {roix2} {roiy1} {roiy2}')
             self.params.change_variable('CalculCPIV_ROI', self.bool_ROI_selection.get())
