@@ -10,6 +10,7 @@ class FrameMasqueApp(Security):
         self.root.title("Mask choice")
         self.params = parameters
 
+        # Variables
         self.bool_selection = tk.StringVar(value="Choose an option")
         self.typemenu_selection = tk.StringVar(value="Choose an option")
         self.file_One_path = tk.StringVar()
@@ -20,6 +21,7 @@ class FrameMasqueApp(Security):
 
         self.create_widgets()
 
+    # Button functions
     def create_widgets(self):
         # Help button
         self.help_button = tk.Button(self.root, text="Help", command=self.show_help)
@@ -79,6 +81,7 @@ class FrameMasqueApp(Security):
         self.update_widgets(self.bool_selection.get())
         self.update_widget_type(self.typemenu_selection.get())
 
+    # Update button state 
     def update_typemenu(self, state):
         if state == "hide":
             self.typemenu_label.grid_remove()
@@ -150,6 +153,7 @@ class FrameMasqueApp(Security):
             self.update_file_One("hide")
             self.update_file_Seq("hide")
 
+    # Verify and submit user inputs 
     def submit(self):
         selection = self.bool_selection.get()
         if selection == "Choose an option":

@@ -11,6 +11,7 @@ class FrameImageApp(Security):
         self.root.title("Image Parameters")
         self.params = parameters
 
+        # Variables
         self.selection = tk.StringVar(value="Choose an option")
         self.fileTWO1_path = tk.StringVar()
         self.fileTWO2_path = tk.StringVar()
@@ -25,6 +26,7 @@ class FrameImageApp(Security):
 
         self.create_widgets()
 
+    # Button functions
     def create_widgets(self):
         # Help button
         self.help_button = tk.Button(self.root, text="Help", command=self.show_help)
@@ -145,6 +147,7 @@ class FrameImageApp(Security):
         #  Initialize
         self.update_widgets(self.selection.get())
 
+    # Update button state
     def update_widgets(self, selection):
         if selection == "Choose an option":
             # Hide all
@@ -280,6 +283,7 @@ class FrameImageApp(Security):
             self.seq_dir_entry.grid()
             self.seq_dir_button.grid()
 
+    # Browse buttons
     def browse_fileTWO1(self):
         file_path = filedialog.askopenfilename(title="Select File 1",
                                                filetypes=[("Image Files","*.tif")])
@@ -308,6 +312,7 @@ class FrameImageApp(Security):
         if dir_path:
             self.seq_dir_path.set(dir_path)
 
+    # Verify and submit user inputs
     def submit(self):
         selection = self.selection.get()
 

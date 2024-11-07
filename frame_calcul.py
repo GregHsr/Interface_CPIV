@@ -11,6 +11,7 @@ class FrameCalculApp(Security):
         self.root.title("Calcul Parameters")
         self.params = parameters
 
+        # Variables
         self.type_meth_selection = tk.StringVar(value="Choose an option")
         self.bool_ROI_selection = tk.StringVar(value="Choose an option")
         self.int_dimx = tk.IntVar(value=0)
@@ -35,6 +36,7 @@ class FrameCalculApp(Security):
 
         self.create_widgets()
 
+    # Button functions
     def create_widgets(self):
         # Help button
         self.help_button = tk.Button(self.root, text="Help", command=self.show_help)
@@ -207,6 +209,7 @@ class FrameCalculApp(Security):
         #  Initialize
         self.update_widgets(self.type_meth_selection.get())
 
+    # Update functions state
     def update_zonecalcul(self, state):
         if state == "hide":
             # Hide ROI int
@@ -258,11 +261,13 @@ class FrameCalculApp(Security):
         elif suivicalc == "NO":
             self.update_suivicalc("hide")
 
-
+    # Verify and save user inputs
     def submit(self):
+        # Verify user indeed answered all questions
         if self.type_meth_selection.get() == "Choose an option":
             messagebox.showerror("Error", "Please select a method type")
             return
+
         if self.bool_ROI_selection.get() == "YES":
             if self.int_roix1.get() == 0 or self.int_roix2.get() == 0 or self.int_roiy1.get() == 0 or self.int_roiy2.get() == 0:
                 messagebox.showerror("Error", "Please enter the ROI values")
@@ -278,6 +283,7 @@ class FrameCalculApp(Security):
         else:
             self.params.change_variable('CalculCPIV_dimXYcell', f'{dimX} {dimY}')
 
+        # Verify values
         recouvrx = self.float_recouvrx.get()
         recouvry = self.float_recouvry.get()
         if recouvrx == 0. and recouvry == 0.:
@@ -343,6 +349,7 @@ class FrameCalculApp(Security):
 
         self.root.destroy()
 
+# Debug purposes
 if __name__ == "__main__":
     root = tk.Tk()
     parameters = data_file()
